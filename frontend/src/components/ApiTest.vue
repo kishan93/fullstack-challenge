@@ -10,7 +10,7 @@ export default {
 
   methods: {
     async fetchData() {
-      const url = 'http://localhost/'
+      const url = import.meta.env.VITE_BASE_URL
       this.apiResponse = await (await fetch(url)).json()
     }
   }
