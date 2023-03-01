@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import ApiTest from "@/components/ApiTest.vue";
+import UserTable from "@/components/UserTable.vue"
 </script>
 
 <template>
   <main>
-    <api-test></api-test>
+    <UserTable />
   </main>
 </template>
