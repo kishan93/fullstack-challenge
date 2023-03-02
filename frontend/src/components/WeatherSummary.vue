@@ -16,7 +16,7 @@ const props = defineProps({
       </span>
 
       <span class="rounded-pill bg-dark text-white px-2 py-1 mx-1">
-        <font-awesome-icon icon="fa-solid fa-skyatlas" />
+        <font-awesome-icon icon="fa-brands fa-skyatlas" />
         {{weatherData.info.windSpeed}} {{weatherData.info.windDirection}}
       </span>
 
