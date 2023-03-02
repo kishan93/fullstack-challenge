@@ -1,16 +1,21 @@
 <script setup lang="ts">
-
 import {onMounted, ref} from "vue";
+import {fetchUsersData} from "@/api/users";
+import UserRow from "@/components/UserRow.vue";
 
 const users = ref([])
+const locationGrids = ref({})
+
 const fetchData = async () => {
-  const url = import.meta.env.VITE_BASE_URL
-  const data = await (await fetch(url)).json()
+  const data = await fetchUsersData()
   users.value = data.users
+  locationGrids.value = data.locationGrids
 }
-onMounted(()=>{
+
+onMounted(() => {
   fetchData()
 })
+
 </script>
 
 <template>
@@ -22,16 +27,15 @@ onMounted(()=>{
           <th scope="col">Name</th>
           <th scope="col">Email</th>
           <th scope="col">Created Date</th>
+          <th scope="col">Weather</th>
         </tr>
       </thead>
       <tbody>
-        <template v-for="(user, index) in users">
-          <tr>
-            <td>{{ user.id }}</td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.created_at }}</td>
-          </tr>
+        <template v-for="user in users" :key="user.id">
+          <UserRow
+            :user="user"
+            :location-grid="user.location_grid_id ? locationGrids[user.location_grid_id] : null"
+          />
         </template>
       </tbody>
     </table>

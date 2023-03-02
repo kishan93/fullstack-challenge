@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Jobs\UpdateUserLocationGrid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -39,4 +40,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function locationGrid()
+    {
+        return $this->belongsTo(LocationGrid::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(fn($user) => UpdateUserLocationGrid::dispatch($user));
+    }
 }
