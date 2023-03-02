@@ -15,4 +15,12 @@ class UsersController extends Controller
 
         return compact('users', 'locationGrids');
     }
+
+    public function show(User $user)
+    {
+        return [
+            'user' => $user,
+            'locationGrid' => $user->locationGrid,
+        ];
+    }
 }
